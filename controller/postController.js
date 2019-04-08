@@ -1,10 +1,5 @@
 require("dotenv").config();
-const request = require('request');
 var Posts = require('../model/Posts')
-var mongoose = require("mongoose");
-
-
-
 
 exports.savePosts = async function (req, res) {
   console.log('req:', req.body)
@@ -12,11 +7,12 @@ exports.savePosts = async function (req, res) {
     if (req.body.text.length > 0) {
       let postContent = req.body.text;
       let post = await Posts.findOne({
-        post_content: postContent.toLowerCase(),
+        post_content: postContent
       });
       if (post == null) {
         let newPost = new Posts({
           post_content: postContent,
+          created_on: Date.now()
         })
 
         let savedPost = await newPost.save();

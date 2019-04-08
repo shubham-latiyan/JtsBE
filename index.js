@@ -14,7 +14,7 @@ const option = {
     useNewUrlParser: true
 };
 // connect to db
-mongoose.connect('mongodb://dbUser:user123@ds127094.mlab.com:27094/custom_users', option, function (err) {
+mongoose.connect(process.env.mongodbConnectionString, option, function (err) {
     if (err)
         console.log(err);
     else
@@ -35,7 +35,7 @@ app.get("/", (req, res) => {
     res.send("<h3>Har Har Mahadev<\h3>")
 })
 // app.use('/routes',root);
-let appSocket = app.listen(3500, function (req, res) {
+app.listen(3500, function (req, res) {
     console.log('server is runnig on port 3500');
 });
 
